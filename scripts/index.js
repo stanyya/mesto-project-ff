@@ -18,7 +18,6 @@ const popupCard = document.querySelector('.popup_type_new-card');
 const popupCardButtonOpen = document.querySelector('.profile__add-button');
 
 const popupProfile = document.querySelector('.popup_type_edit');
-const popupProfileButtonOpen = document.querySelector('.profile__edit-button');
 
 const popupConfirm = document.querySelector('.popup_type_confirm');
 const popupConfirmButton = popupConfirm.querySelector('.popup__button_confirm');
@@ -76,14 +75,6 @@ const handleCardDelete = ({ cardId, buttonElement }) => {
       });
   };
 };
-
-const handleCardFormSubmit = (event) => {
-  event.preventDefault();
-
-  renderLoading({
-    buttonElement: cardFormSubmitButton,
-    isLoading: true,
-  });
 
   APICreateCard({
     name: cardNameInput.value,
