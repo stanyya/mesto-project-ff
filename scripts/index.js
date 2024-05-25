@@ -145,24 +145,11 @@ const handleCardImageClick = ({ cardName, cardLink }) => {
 
 cardForm.addEventListener('submit', handleCardFormSubmit);
 
-profileForm.addEventListener('submit', handleProfileFormSubmit);
-
-profileImageForm.addEventListener('submit', handleProfileImageFormSubmit);
-
 popupImage.addEventListener('click', handleModalClick);
 
-popupProfileImage.addEventListener('click', handleModalClick);
-
-profileImage.addEventListener('click', handleProfileImageClick);
 
 popupCard.addEventListener('click', handleModalClick);
 popupCardButtonOpen.addEventListener('click', handlePopupCardButtonOpenClick);
-
-popupProfile.addEventListener('click', handleModalClick);
-popupProfileButtonOpen.addEventListener(
-  'click',
-  handlePopupProfileButtonOpenClick
-);
 
 popupConfirm.addEventListener('click', handleModalClick);
 
