@@ -17,22 +17,6 @@ const cardLinkInput = cardForm.elements.link;
 const popupCard = document.querySelector('.popup_type_new-card');
 const popupCardButtonOpen = document.querySelector('.profile__add-button');
 
-const profileImageForm = document.forms['edit-avatar'];
-const profileImageInput = profileImageForm.elements.avatar;
-const profileImageFormSubmitButton =
-  profileImageForm.querySelector('.popup__button');
-
-const popupProfileImage = document.querySelector('.popup_type_edit-avatar');
-
-const profileImage = document.querySelector('.profile__image');
-const profileName = document.querySelector('.profile__title');
-const profileDescription = document.querySelector('.profile__description');
-
-const profileForm = document.forms['edit-profile'];
-const profileFormSubmitButton = profileForm.querySelector('.popup__button');
-const profileNameInput = profileForm.elements.name;
-const profileDescriptionInput = profileForm.elements.description;
-
 const popupProfile = document.querySelector('.popup_type_edit');
 const popupProfileButtonOpen = document.querySelector('.profile__edit-button');
 
