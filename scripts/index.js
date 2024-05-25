@@ -76,6 +76,14 @@ const handleCardDelete = ({ cardId, buttonElement }) => {
   };
 };
 
+const handleCardFormSubmit = (event) => {
+  event.preventDefault();
+
+  renderLoading({
+    buttonElement: cardFormSubmitButton,
+    isLoading: true,
+  });
+
   APICreateCard({
     name: cardNameInput.value,
     link: cardLinkInput.value,
@@ -107,7 +115,6 @@ const handleCardDelete = ({ cardId, buttonElement }) => {
     });
 };
 
-
 const handlePopupProfileButtonOpenClick = () => {
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
@@ -133,11 +140,9 @@ const handleCardImageClick = ({ cardName, cardLink }) => {
   openModal(popupImage);
 };
 
-
 cardForm.addEventListener('submit', handleCardFormSubmit);
 
 popupImage.addEventListener('click', handleModalClick);
-
 
 popupCard.addEventListener('click', handleModalClick);
 popupCardButtonOpen.addEventListener('click', handlePopupCardButtonOpenClick);
