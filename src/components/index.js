@@ -44,7 +44,7 @@ initialCards.forEach((cardElement) => {
   const cardAdd = createCard(cardElement, cardDelete, likeCard, showImage);
   placesList.append(cardAdd);
 });
-  
+
 /* @todo: Открыть изображение */
 function showImage(link, name) {
   popupImage.src = link;

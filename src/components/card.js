@@ -19,7 +19,6 @@ export function cardDelete(evt) {
   const cardDel = evt.target.closest('.card');
   cardDel.remove();
 }
-
 //функция лайка карточки
 export function likeCard(evt) {
   evt.target.classList.toggle('card__like-button_is-active');
