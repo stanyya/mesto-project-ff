@@ -23,6 +23,6 @@ export function closeModalOverlay(evt) {
   const openedPopup = document.querySelector(".popup_is-opened");
 
   if (evt.target.matches(".popup_is-opened, .popup__close"))
-    closePopup(openedPopup);
+    closeModal(openedPopup);
 
 }
