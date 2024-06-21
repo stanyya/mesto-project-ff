@@ -20,7 +20,9 @@ if (evt.key === 'Escape') {
 
 // закрытие попапа нажатием на Overlay
 export function closeModalOverlay(evt) {
-if (evt.target.classList.contains('popup')) {
-  closeModal(document.querySelector('.popup_is-opened'));
-}
+  const openedPopup = document.querySelector(".popup_is-opened");
+
+  if (evt.target.matches(".popup_is-opened, .popup__close"))
+    closePopup(openedPopup);
+
 }
