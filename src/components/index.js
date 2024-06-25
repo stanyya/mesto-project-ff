@@ -1,4 +1,4 @@
-import '../pages/index.css'
+import '../pages/index.css';
 import {initialCards} from './cards.js' 
 import {createCard, cardDelete, likeCard} from './card.js'
 import {openModal, closeModal} from './modal.js'
@@ -19,25 +19,9 @@ const jobInput  = formElementProfile.querySelector('.popup__input_type_descripti
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 
-const formElementCard = modalNewCard.querySelector('.popup__form');
-const imageName = formElementCard.querySelector('.popup__input_type_card-name');
-const urlImage = formElementCard.querySelector('.popup__input_type_url');
-
 const popupTypeImage = document.querySelector('.popup_type_image');
 const popupImage = popupTypeImage.querySelector('.popup__image');
 const popupCaption = popupTypeImage.querySelector('.popup__caption');
-
-//функция обработчик отправки формы добавление карточки
-function handleFormSubmitCard(evt) {
-  evt.preventDefault();
-  const newCard = {
-      name: imageName.value,
-      link: urlImage.value
-  }
-  placesList.prepend(createCard(newCard, cardDelete, likeCard, showImage));
-  formElementCard.reset();
-  closeModal(modalNewCard);
-}
 
 // @todo: Вывести карточки на страницу
 initialCards.forEach((cardElement) => {
