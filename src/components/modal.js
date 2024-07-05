@@ -4,6 +4,7 @@ export function openModal(popup) {
   document.addEventListener('keydown', closeModalEsc);
   document.addEventListener('mousedown', closeModalOverlay);
 }
+
 // закрытие попапа
 export function closeModal(popup) {
   popup.classList.remove('popup_is-opened');
@@ -18,9 +19,9 @@ if (evt.key === 'Escape') {
 }
 }
 
-// закрытие попапа нажатием на Overlay
+// закрытие попапа нажатием на оверлей
 export function closeModalOverlay(evt) {
-	if (evt.target.classList.contains('popup')) {
-		return closeModal(evt.target);
-	}
+if (evt.target.classList.contains('popup')) {
+      closeModal(evt.target);
+}
 }
