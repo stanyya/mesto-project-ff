@@ -1,90 +1,107 @@
-// Конфиг с токеном и названием группы
-const config = {
-    baseUrl: 'https://nomoreparties.co/v1/wff-cohort-17',
-    headers: {
-        authorization: 'af13ad54-2f00-48cf-b322-338d01485ad9',
-        
-    }
-}
+
+const BASE_URL = "https://mesto.nomoreparties.co/v1/wff-cohort-17/";
 
 // Запрос проверки результата ответа
-function handleResponse(res) {
-    if (res.ok) {
-        return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-}
+const handleResponse = (response) => {
+  if (response.ok) {
+    return response.json();
+  }
+  else {
+    throw new Error('Ошибка!');
+  }
+};
 
-// Универсальная функция запроса с проверкой ответа
-function request(url, options) {
-    return fetch(url, options)
-        .then(handleResponse);
-}
+const apiURLpart = {
+  user: "users/me",
+  cards: "cards",
+  likes: "cards/likes"
+};
+
+const headers = {
+  Authorization: 'af13ad54-2f00-48cf-b322-338d01485ad9',
+  "Content-Type": "application/json"
+};
 
 // Запрос загрузки информации о пользователе с сервера
-export function getProfileInfo() {
-    return request(`${config.baseUrl}/users/me`, {
-        headers: config.headers})
-} 
-
-// Запрос карточек с сервера
-export function getInitialCards() {
-    return request(`${config.baseUrl}/cards`, {
-        headers: config.headers})
-} 
+const getProfileAPI = () => {
+  const userURL = BASE_URL + `${apiURLpart.user}`;
+  return fetch(userURL, {
+    method: "GET",
+    headers
+  })
+  .then(handleResponse)
+};
 
 // Запрос обновления информации о пользователе
-export function updateProfileInfo(profile) {
-    return request(`${config.baseUrl}/users/me`, {
-        method: 'PATCH',
-        headers: config.headers,
-        body: JSON.stringify({
-            name: profile.name,
-            about: profile.about
-        }),
-    })
-}
+const sendProfileAPI = (name, about) => {
+  const userURL = BASE_URL + `${apiURLpart.user}`;
+  return fetch(userURL, {
+    method: "PATCH",
+    body: JSON.stringify({
+      name,
+      about
+    }),
+    headers
+  })
+  .then(handleResponse)
+};
+
+// Запрос на изменение аватара
+const sendAvatarAPI = (avatar) => {
+  const userAvatarURL = BASE_URL + `${apiURLpart.user}/avatar`;
+  return fetch(userAvatarURL, {
+    method: "PATCH",
+    body: JSON.stringify({
+      avatar 
+    }),
+    headers
+  })
+  .then(handleResponse)
+};
+
+// Запрос карточек с сервера
+const getCardsAPI = () => {
+  const cardsURL = BASE_URL + `${apiURLpart.cards}`;
+  return fetch(cardsURL, {
+    method: "GET",
+    headers
+  })
+  .then(handleResponse)
+};
 
 // Запрос добавления новой карточки
-export function addCard(card) {
-    return request(`${config.baseUrl}/cards`, {
-        method: 'POST',
-        headers: config.headers,
-        body: JSON.stringify({
-            name: card.name,
-            link: card.link
-        }),
-    })
-}
-
-// Запрос удаления карточки, добавленной пользователем
-export function deleteMyCard(cardId) {
-    return request(`${config.baseUrl}/cards/${cardId}`, {
-        method: 'DELETE',
-        headers: config.headers})
-}
+const sendNewCardAPI = (name, link) => {
+  const cardsURL = BASE_URL + `${apiURLpart.cards}`;
+  return fetch(cardsURL, {
+    method: "POST",
+    body: JSON.stringify({
+      name,
+      link
+    }),
+    headers
+  })
+  .then(handleResponse)
+};
 
 // Запрос добавления лайка
-export function addLike(cardId) {
-    return request(`${config.baseUrl}/cards/likes/${cardId}`, {
-        method: 'PUT',
-        headers: config.headers})
+const likeCardAPI = (id) => {
+  const likesURL = BASE_URL + `${apiURLpart.likes}/${id}`; 
+  return fetch(likesURL, {
+    method: "PUT",
+    headers
+  })
+  .then(handleResponse)
 }
 
 // Запрос снятия лайка
-export function deleteLike(cardId) {
-    return request(`${config.baseUrl}/cards/likes/${cardId}`, {
-        method: 'DELETE',
-        headers: config.headers})
-}
+const delLikeCardAPI = (id) => {
+  const likesURL = BASE_URL + `${apiURLpart.likes}/${id}`; 
+  return fetch(likesURL, {
+    method: "DELETE",
+    headers
+  })
+  .then(handleResponse)
+};
 
-// Запрос на изменение аватара
-export function newAvatar(link) {
-    return request(`${config.baseUrl}/users/me/avatar`, {
-        method: 'PATCH',
-        headers: config.headers,
-        body: JSON.stringify({
-            avatar: link,
-        })
-    })
-}
+
+export { getProfileAPI, getCardsAPI, sendProfileAPI, sendNewCardAPI, likeCardAPI, delLikeCardAPI, sendAvatarAPI }

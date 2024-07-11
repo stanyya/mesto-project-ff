@@ -1,27 +1,34 @@
 // открытие попапа
-export function openModal(popup) {
-  popup.classList.add('popup_is-opened');
-  document.addEventListener('keydown', closeModalEsc);
-  document.addEventListener('mousedown', closeModalOverlay);
-}
-
-// закрытие попапа
-export function closeModal(popup) {
-  popup.classList.remove('popup_is-opened');
-  document.removeEventListener('keydown', closeModalEsc);
-  document.removeEventListener('mousedown', closeModalOverlay);
-}
+export function openModal(modal) {
+  modal.classList.add('popup_is-animated');
+  modal.classList.add('popup_is-opened');
+  document.addEventListener('keydown', handleKeyDown);
+  modal.addEventListener('click', handleOutside);
+};
 
 // закрытие попапа Esc
-export function closeModalEsc(evt) {
-if (evt.key === 'Escape') {
-  closeModal(document.querySelector('.popup_is-opened'));
-}
-}
-
+function handleKeyDown(evt) {
+  if (evt.key === 'Escape') {
+      const popupIsOpen = document.querySelector('.popup_is-opened');
+      closeModal(popupIsOpen);
+  }
+};
+  
 // закрытие попапа нажатием на оверлей
-export function closeModalOverlay(evt) {
-if (evt.target.classList.contains('popup')) {
-      closeModal(evt.target);
-}
-}
+function handleOutside (evt) {
+  if (evt.target === evt.currentTarget) {
+      closeModal(evt.currentTarget);
+  }
+};
+
+export function handleCloseModal(evt) {
+  const closeModalFromButton = evt.target.closest('.popup');
+      closeModal(closeModalFromButton);
+};
+
+// закрытие попапа
+export function closeModal (modal) {
+  modal.classList.remove('popup_is-opened');
+  modal.removeEventListener('click', handleOutside);
+  document.removeEventListener('keydown', handleKeyDown);
+};
