@@ -8,14 +8,6 @@ import { getProfileAPI, getCardsAPI, sendProfileAPI, sendNewCardAPI, sendAvatarA
 const container = document.querySelector('.places__list');
 const editProfile = document.querySelector('.profile__edit-button');
 const addPlace = document.querySelector('.profile__add-button');
-const formEdit = document.forms.edit_profile;
-const formEditName = formEdit.elements.name;
-const formEditDescription = formEdit.elements.description;
-const formAdd = document.forms.new_place;
-const formAvatar = document.forms.avatar;
-const formAvatarImg = formAvatar.elements.avatar;
-const placeName = formAdd.elements.place_name;
-const placeLink = formAdd.elements.link;
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 const profileImage = document.querySelector(".profile__image");
@@ -25,8 +17,16 @@ const closeButtons = document.querySelectorAll('.popup__close');
 const modalNewCard = document.querySelector('.popup_type_new-card');
 const modalEditProfile = document.querySelector('.popup_type_edit');
 const modalImage = document.querySelector('.popup_type_image');
-const modalAvatar = document.querySelector('.popup_type_avatar')
-  
+const modalAvatar = document.querySelector('.popup_type_avatar');
+const formEdit = document.forms.edit_profile;
+const formEditName = formEdit.elements.name;
+const formEditDescription = formEdit.elements.description;
+const formAdd = document.forms.new_place;
+const formAvatar = document.forms.avatar;
+const formAvatarImg = formAvatar.elements.avatar;
+const placeName = formAdd.elements.place_name;
+const placeLink = formAdd.elements.link;
+
   // обработчики события 
   function handleOpenModalAvatar() {
     clearValidation(modalAvatar, validationConfig);
