@@ -9,6 +9,20 @@
   margin: 0 29px 0 0;
 }
 
+.profile__image:hover::after {
+  content: "";
+  block-size: 100%;
+  cursor: pointer;
+  display: block;
+  inline-size: 100%;
+  cursor: url('../../../images/edit-icon.svg'), auto;
+  background-color: rgba(0, 0, 0, .8);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+}
+
+
 @media screen and (max-width: 740px) {
   .profile__image {
     margin: 0 10px 0 0;
@@ -19,9 +33,4 @@
   .profile__image {
     margin-right: 0;
   }
-}
-
-.profile__image:hover {
-  opacity: 0.8;
-  cursor: url('../../../images/edit-icon.svg'), auto;
 }

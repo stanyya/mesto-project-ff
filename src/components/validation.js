@@ -6,7 +6,7 @@ const validationConfig = {
     inputErrorClass: "popup__input_type_error",
     errorClass: "popup__error_visible"
   };
-  
+
   // Функция, которая добавляет класс с ошибкой
   const showError = (formElement, inputElement, errorMessage, validationConfig) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -14,7 +14,7 @@ const validationConfig = {
     errorElement.textContent = errorMessage;
     errorElement.classList.add(validationConfig.errorClass);
   };
-  
+
   // Функция, которая удаляет класс с ошибкой
   const hideError = (formElement, inputElement, validationConfig) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -22,7 +22,7 @@ const validationConfig = {
     errorElement.classList.remove(validationConfig.errorClass);
     errorElement.textContent = "";
   };
-  
+
   // Добавление обработчиков всем формам
   const enableValidation = (validationConfig) => {
     const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
@@ -33,7 +33,7 @@ const validationConfig = {
       setEventListeners(formElement, validationConfig);
     });
   };
-  
+
 // Добавление обработчиков всем полям формы
   const setEventListeners = (formElement, validationConfig) => {
     const inputList = Array.from(
@@ -88,13 +88,11 @@ const validationConfig = {
       formElement.querySelectorAll(validationConfig.inputSelector),
     );
     const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
-    buttonElement.setAttribute("disabled",true);
-    buttonElement.classList.add(validationConfig.inactiveButtonClass);
-  
     inputList.forEach((inputElement) => {
       hideError(formElement, inputElement, validationConfig);
       inputElement.setCustomValidity("");
     });
-  };
+    toggleButtonState(inputList, buttonElement, validationConfig);
+  }
   
   export { validationConfig, enableValidation, clearValidation }
