@@ -1,12 +1,9 @@
 // открытие попапа
-export function openModal(modal) {
-  modal.classList.add("popup_is-animated");
-  setTimeout(() => {
-    modal.classList.add("popup_is-opened");
-  }, 1);
+export function openModal(modal) {  
+  modal.classList.add("popup_is-opened"); 
   document.addEventListener('keydown', handleKeyDown);
-  modal.addEventListener('click', handleOutside);
-};
+  modal.addEventListener('click', handleOutside); 
+}
 
 // закрытие попапа Esc
 function handleKeyDown(evt) {
@@ -23,14 +20,15 @@ function handleOutside (evt) {
   }
 };
 
-export function handleCloseModal(evt) {
-  const closeModalFromButton = evt.target.closest('.popup');
-      closeModal(closeModalFromButton);
-};
-
 // закрытие попапа
 export function closeModal (modal) {
   modal.classList.remove('popup_is-opened');
   modal.removeEventListener('click', handleOutside);
   document.removeEventListener('keydown', handleKeyDown);
+};
+
+export function handleCloseModal(evt) {
+    
+  const closeModalFromButton = evt.target.closest('.popup');
+      closeModal(closeModalFromButton);
 };
