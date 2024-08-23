@@ -1,5 +1,5 @@
 
-const BASE_URL = "https://mesto.nomoreparties.co/v1/wff-cohort-17/";
+const BASE_URL = "https://mesto.nomoreparties.co/v1/wff-cohort-20/";
 
 // Запрос проверки результата ответа
 const handleResponse = (response) => {
@@ -18,7 +18,7 @@ const apiURLpart = {
 };
 
 const headers = {
-  Authorization: 'af13ad54-2f00-48cf-b322-338d01485ad9',
+  Authorization: '095639e2-4f40-4dda-8dd3-5fd55d22a0d0',
   "Content-Type": "application/json"
 };
 
@@ -103,5 +103,14 @@ const delLikeCardAPI = (id) => {
   .then(handleResponse)
 };
 
+const deleteCard = (cardId) => {
+  const delCard = BASE_URL + `/cards/${cardId}`;
+  return fetch(delCard, {
+    method: "DELETE",
+    headers
+  })
+  .then(handleResponse);
+};
 
-export { getProfileAPI, getCardsAPI, sendProfileAPI, sendNewCardAPI, likeCardAPI, delLikeCardAPI, sendAvatarAPI }
+
+export { getProfileAPI, getCardsAPI, sendProfileAPI, sendNewCardAPI, likeCardAPI, delLikeCardAPI, sendAvatarAPI, deleteCard }

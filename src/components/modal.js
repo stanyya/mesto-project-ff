@@ -1,8 +1,9 @@
 // открытие попапа
-export function openModal(modal) {  
-  modal.classList.add("popup_is-opened"); 
+export function openModal(modal) {
+  modal.classList.add('popup_is-animated');
+  modal.classList.add('popup_is-opened');
   document.addEventListener('keydown', handleKeyDown);
-  modal.addEventListener('click', handleOutside); 
+  modal.addEventListener('click', handleOutside);
 }
 
 // закрытие попапа Esc
