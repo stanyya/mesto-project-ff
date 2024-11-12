@@ -1,122 +1,89 @@
-
-export {
-  getResponseData,
-  logError,
-  getCardsApi,
-  getUserInfoApi,
-  patchProfileInfoApi,
-  postNewCardApi,
-  putLikeOnCardApi,
-  deleteLikeFromCardApi,
-  deleteCardFromServerApi,
-  patchAvatarApi
-};
-
-const COHORT = "wff-cohort-25";
-const TOKEN = "6c7b9efb-beaf-45fa-a496-7e6a2a181f22";
-const BASE_URL = "https://mesto.nomoreparties.co/v1";
-
-function getResponseData(res) {
-  if (!res.ok) {
-      return Promise.reject(`Ошибка: ${res.status}`);
-  }
-  return res.json();
+const config = {
+    baseUrl: 'https://nomoreparties.co/v1/wff-cohort-25',
+    headers: {
+        authorization: '6c7b9efb-beaf-45fa-a496-7e6a2a181f22',
+        'Content-Type': 'application/json'
+    }
 }
 
-function logError(error) {
-  return console.log(`Ошибка.....: ${error}`);
+// Запрос проверки результата ответа
+function handleResponse(res) {
+    if (res.ok) {
+        return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-const getCardsApi = () => {
-  return fetch(BASE_URL + '/' + COHORT + '/cards', {
-      method: 'GET',
-      headers: {
-          authorization: TOKEN
-      }
-  })
-      .then(res => getResponseData(res))
+// Универсальная функция запроса с проверкой ответа
+function request(url, options) {
+    return fetch(url, options)
+        .then(handleResponse);
 }
 
-const getUserInfoApi = () => {
-  return fetch(BASE_URL + '/' + COHORT + '/users/me', {
-      method: 'GET',
-      headers: {
-          authorization: TOKEN
-      }
-  })
-      .then(res => getResponseData(res))
+// Запрос загрузки информации о пользователе с сервера
+export function getProfileInfo() {
+    return request(`${config.baseUrl}/users/me`, {
+        headers: config.headers})
+} 
+
+// Запрос карточек с сервера
+export function getInitialCards() {
+    return request(`${config.baseUrl}/cards`, {
+        headers: config.headers})
+} 
+
+// Запрос обновления информации о пользователе
+export function updateProfileInfo(profile) {
+    return request(`${config.baseUrl}/users/me`, {
+        method: 'PATCH',
+        headers: config.headers,
+        body: JSON.stringify({
+            name: profile.name,
+            about: profile.about
+        }),
+    })
 }
 
-const patchProfileInfoApi = (userName, userDescription) => {
-  return fetch(BASE_URL + '/' + COHORT + '/users/me', {
-      method: 'PATCH',
-      headers: {
-          authorization: TOKEN,
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-          name: userName.value,
-          about: userDescription.value
-      })
-  })
-      .then(res => getResponseData(res))
+// Запрос добавления новой карточки
+export function addCard(card) {
+    return request(`${config.baseUrl}/cards`, {
+        method: 'POST',
+        headers: config.headers,
+        body: JSON.stringify({
+            name: card.name,
+            link: card.link
+        }),
+    })
 }
 
-const postNewCardApi = (cardName, cardLink) => {
-  return fetch(BASE_URL + '/' + COHORT + '/cards', {
-      method: 'POST',
-      headers: {
-          authorization: TOKEN,
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-          name: cardName.value,
-          link: cardLink.value
-      })
-  })
-      .then(res => getResponseData(res))
+// Запрос удаления карточки, добавленной владельцем сайта
+export function deleteMyCard(cardId) {
+    return request(`${config.baseUrl}/cards/${cardId}`, {
+        method: 'DELETE',
+        headers: config.headers})
 }
 
-const putLikeOnCardApi = (cardId) => {
-  return fetch(BASE_URL + '/' + COHORT + '/cards/likes/' + cardId, {
-      method: 'PUT',
-      headers: {
-          authorization: TOKEN
-      }
-  })
-      .then(res => getResponseData(res))
+// Запрос добавления лайка
+export function addLike(cardId) {
+    return request(`${config.baseUrl}/cards/likes/${cardId}`, {
+        method: 'PUT',
+        headers: config.headers})
 }
 
-const deleteLikeFromCardApi = (cardId) => {
-  return fetch(BASE_URL + '/' + COHORT + '/cards/likes/' + cardId, {
-      method: 'DELETE',
-      headers: {
-          authorization: TOKEN
-      }
-  })
-      .then(res => getResponseData(res))
+// Запрос снятия лайка
+export function deleteLike(cardId) {
+    return request(`${config.baseUrl}/cards/likes/${cardId}`, {
+        method: 'DELETE',
+        headers: config.headers})
 }
 
-const deleteCardFromServerApi = (cardId) => {
-  return fetch(BASE_URL + '/' + COHORT + '/cards/' + cardId, {
-      method: 'DELETE',
-      headers: {
-          authorization: TOKEN
-      }
-  })
-      .then(res => getResponseData(res))
-}
-
-const patchAvatarApi = (avatarLink) => {
-  return fetch(BASE_URL + '/' + COHORT + '/users/me/avatar', {
-      method: 'PATCH',
-      headers: {
-          authorization: TOKEN,
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-          avatar: avatarLink.value,
-      })
-  })
-      .then(res => getResponseData(res))
+// Запрос на изменение аватарки
+export function newAvatar(link) {
+    return request(`${config.baseUrl}/users/me/avatar`, {
+        method: 'PATCH',
+        headers: config.headers,
+        body: JSON.stringify({
+            avatar: link,
+        })
+    })
 }
