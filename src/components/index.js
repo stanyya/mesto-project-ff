@@ -80,6 +80,7 @@ function handleFormSubmitAvatar(evt) {
         .then((newLink) => {
             avatarImg.style.backgroundImage = `url(${newLink.avatar})`;
             closeModal(modalNewAvatar);
+            formElementAvatar.reset();
         })
         .catch((error) => {
             console.error(error);
@@ -87,7 +88,6 @@ function handleFormSubmitAvatar(evt) {
         .finally(() => {
             evt.submitter.textContent = "Сохранить";
         })
-    formElementAvatar.reset();
 }
 
 // Изменить аватарку при нажатии на кнопку "Сохранить"
@@ -129,6 +129,7 @@ function handleFormSubmitCard(evt) {
         .then((newCardData) => {
             placesList.prepend(createCard(newCardData, newCardData.owner._id, cardDelete, likeCard, showImage));
             closeModal(modalNewCard);
+            formElementCard.reset();
         })
         .catch((error) => {
             console.error(error);
@@ -136,7 +137,6 @@ function handleFormSubmitCard(evt) {
         .finally(() => {
             evt.submitter.textContent = 'Сохранить';
         })
-    formElementCard.reset();
 }
 
 // Добавить карточку при нажатии на кнопку "Сохранить"

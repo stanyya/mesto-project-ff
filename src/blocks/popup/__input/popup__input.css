@@ -10,10 +10,6 @@
   margin-bottom: 10px;
 }
 
-.popup__input:focus {
-  outline: none
-}
-
 .popup__input:last-of-type {
   margin-bottom: 0;
 }
@@ -41,8 +37,6 @@
 
 .popup__error_visible {
   display: block;
-  position: absolute;
-  z-index: 1;
   color: #FF0000;
   font-weight: 400;
   font-size: 12px;
