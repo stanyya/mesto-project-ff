@@ -33,9 +33,7 @@ export function createCard(card, userId, cardDelete, likeCard, showImage) {
 }
 
 
-
 // @todo: Функция удаления карточки
-// я уже не знаю как правильно написать функцию удаления карточки, эта вроде работает
 export function cardDelete(evt, card) {
     const cardDel = evt.target.closest('.card');
     deleteMyCard(card._id)
